@@ -9,8 +9,6 @@ public class Single {
     @Autowired
     private Proto proto;
 
-//    @Autowired
-//    ApplicationContext applicationContext;
 
     public Proto getProto() {
         return proto;
