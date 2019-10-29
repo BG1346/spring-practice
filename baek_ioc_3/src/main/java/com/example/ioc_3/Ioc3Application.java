@@ -11,14 +11,4 @@ public class Ioc3Application {
     public static void main(String[] args) {
         SpringApplication.run(Ioc3Application.class, args);
     }
-
-    @Bean
-    public MessageSource messageSource(){
-        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("classpath:messages");
-        messageSource.setDefaultEncoding("UTF-8");
-        messageSource.setCacheSeconds(3);
-        return messageSource;
-    }
-
 }
