@@ -14,10 +14,11 @@ public class Ioc3Application {
 
     @Bean
     public MessageSource messageSource(){
-        ReloadableResourceBundleMessageSource messsageSource = new ReloadableResourceBundleMessageSource();
-        messsageSource.setBasename("classpath:messages");
-        messsageSource.setDefaultEncoding("UTF-8");
-        return messsageSource;
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setBasename("classpath:messages");
+        messageSource.setDefaultEncoding("UTF-8");
+        messageSource.setCacheSeconds(3);
+        return messageSource;
     }
 
 }
