@@ -22,5 +22,6 @@ public class AppRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         applicationContext.publishEvent(new MyEvent(this, 1000));
+//        applicationContext.publishEvent(new MyEvent(1000));
     }
 }

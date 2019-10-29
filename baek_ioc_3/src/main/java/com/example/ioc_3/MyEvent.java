@@ -17,6 +17,10 @@ public class MyEvent{
         this.data = data;
     }
 
+    public MyEvent(int data) {
+        this.data = data;
+    }
+
     public int getData() {
         return data;
     }
