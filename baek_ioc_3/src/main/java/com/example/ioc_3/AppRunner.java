@@ -16,6 +16,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
 import java.util.Arrays;
 import java.util.Locale;
@@ -25,15 +26,18 @@ import java.util.Locale;
 public class AppRunner implements ApplicationRunner {
 
     @Autowired
-    ResourceLoader resourceLoader;
+    Validator validator;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+        System.out.println(validator.getClass());
         Event event = new Event();
-        EventValidator eventValidator = new EventValidator();
+        event.setLimit(-1);
+        event.setEmail("df");
         Errors errors = new BeanPropertyBindingResult(event,  "event");
 
-        eventValidator.validate(event, errors);
+        validator.validate(event, errors);
+
         System.out.println(errors.hasErrors());
 
         errors.getAllErrors().forEach(e -> {
