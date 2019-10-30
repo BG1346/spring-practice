@@ -22,28 +22,38 @@ import java.util.Arrays;
 import java.util.Locale;
 
 @Component
-@EnableAsync
 public class AppRunner implements ApplicationRunner {
 
-    @Autowired
-    Validator validator;
+    @Value("#{1+1}")
+    int value;
+
+    @Value("#{'hello ' +'world'}")
+    String greeting;
+
+    @Value("#{1 eq 1}")
+    boolean trueOrFalse;
+
+    @Value("hello")
+    String hello;
+
+    @Value("${my.value}")
+    int myValue;
+
+    @Value("#{${my.value} eq 100}")
+    boolean ismyValue100;
+
+    @Value("#{sample.data}")
+    int sampledata;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        System.out.println(validator.getClass());
-        Event event = new Event();
-        event.setLimit(-1);
-        event.setEmail("df");
-        Errors errors = new BeanPropertyBindingResult(event,  "event");
-
-        validator.validate(event, errors);
-
-        System.out.println(errors.hasErrors());
-
-        errors.getAllErrors().forEach(e -> {
-            System.out.println("==========error code==========");
-            Arrays.stream(e.getCodes()).forEach(System.out::println);
-            System.out.println(e.getDefaultMessage());
-        });
+        System.out.println("==================");
+        System.out.println(value);
+        System.out.println(greeting);
+        System.out.println(trueOrFalse);
+        System.out.println(hello);
+        System.out.println(myValue);
+        System.out.println(ismyValue100);
+        System.out.println(sampledata);
     }
 }
