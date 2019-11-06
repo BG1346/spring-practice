@@ -14,7 +14,7 @@ public class Application {
     public static void main(String[] args) {
 //        SpringApplication springApplication = new SpringApplication(SpringInitApplication.c);
         SpringApplication springApplication = new SpringApplication(Application.class);
-        springApplication.addListeners(new SampleListener());
+//        springApplication.addListeners(new SampleListener());
         springApplication.run(args);
     }
 }
