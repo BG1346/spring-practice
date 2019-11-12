@@ -11,6 +11,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.client.RestTemplate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,12 +23,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-@AutoConfigureMockMvc
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class SampleControllerTest {
 
     @Autowired
-    MockMvc mockMvc;
+    TestRestTemplate testRestTemplate;
 
     @MockBean
     SampleService sampleService;
@@ -36,10 +36,9 @@ public class SampleControllerTest {
     public void hello() throws Exception {
         when(sampleService.getName()).thenReturn("mock");
 
-        mockMvc.perform(get("/hello"))
-                .andExpect(status().isOk())
-                .andExpect(content().string("hello mock"))
-                .andDo(print());
+
+        String result = testRestTemplate.getForObject("/hello", String.class);
+        assertThat(result).isEqualTo("hello mock");
     }
 
 }
